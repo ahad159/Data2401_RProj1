@@ -2,7 +2,12 @@
 title: "R Project 1 - Hello R"
 author: "Hasan Khan"
 date: "Due Sep 8th"
-output: html_document
+output: 
+  html_document: 
+    fig_width: 11
+    fig_height: 9
+    highlight: kate
+    theme: sandstone
 ---
 
 MAKE SURE YOU READ AND FOLLOW **ALL** INSTRUCTIONS ON THE INSTRUCTION DOCUMENT. 
@@ -65,7 +70,7 @@ r of star is greater than the r of dino
 
 (Add code and narrative as needed. Note that two R chunks are given but they are not labeled. Use the convention from above to name them appropriately.)
 
-```{r plot-circle, fig.height=3, fig.width=6}
+```{r plot-circle, fig.height=7, fig.width=4}
 dino_data<- datasaurus_dozen %>%
   filter(dataset == "circle")
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
@@ -87,4 +92,15 @@ r of circle is smaller than that of dino
 
 ### Exercise 5
 
-(Add code and narrative as needed. To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, with the green +C.)
+```{r}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+geom_point()+
+facet_wrap(~ dataset, ncol = 3) 
+```
+```{r}
+datasaurus_dozen %>% group_by(dataset) %>% 
+  summarize(r = cor(x, y)) %>%
+  print(26)
+```
+
+
